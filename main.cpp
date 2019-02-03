@@ -103,7 +103,7 @@ int main()
     // Install directory
     nana::label download_dir_lbl{fm, "Install Directory"};
     download_dir_lbl.format(true);
-    std::string default_install_path = "/opt/hdd/programming/cpp/AG_PKG/AG_PKG_2/test"; //"~/AG/Dependencies/";
+    std::string default_install_path = "~/AG/Dependencies/";
     nana::textbox install_dir_textbox {fm, default_install_path};
     install_dir_textbox.multi_lines(false);
     nana::button search_for_install_directory_btn {fm, "Search"};
@@ -150,9 +150,8 @@ int main()
         boost::filesystem::path final_unzip_path = final_install_path / "AG_Dependencies_1_0_0";
         final_install_path /= "AG_Dependencies_1_0_0.zip";
         auto final_install_path_string = final_install_path.string();
-        // download_file("https://github.com/lavinrp/GameBackbone/archive/master.zip", final_install_path_string);
-        download_file("https://www.dropbox.com/s/njt4kmxdfx35nfl/Maps.txt", final_install_path_string);
-        // unzip_file_to_dest(final_install_path_string, final_unzip_path.string());
+        download_file("https://www.dropbox.com/s/w18c6uoqxvm9gfh/Clang_7_stdlibcpp.zip?dl=1", final_install_path_string);
+        unzip_file_to_dest(final_install_path_string, final_unzip_path.string());
     });
 
     // layout form
