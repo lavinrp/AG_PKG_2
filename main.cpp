@@ -165,7 +165,7 @@ int main()
     // Install directory
     nana::label download_dir_lbl{fm, "Install Directory"};
     download_dir_lbl.format(true);
-    std::string default_install_path = "~/AG/Dependencies/";
+    std::string default_install_path = "/AG/Dependencies/";
     nana::textbox install_dir_textbox {fm, default_install_path};
     install_dir_textbox.multi_lines(false);
     nana::button search_for_install_directory_btn {fm, "Search"};
@@ -180,11 +180,24 @@ int main()
             install_dir_textbox.append(folder.value().string(), false);
         }
     });
+    install_dir_textbox.events().text_changed([&]
+    {
+        if (boost::filesystem::exists(install_dir_textbox.caption()))
+        {
+            install_dir_textbox.bgcolor(nana::colors::white);
+            status_label.caption("");
+        }   
+        else
+        {
+            install_dir_textbox.bgcolor(nana::colors::red);
+            status_label.caption("Warning: Path does not exist (will attempt to create path on install)");
+        }
+    });
 
     // Project directory
     nana::label project_dir_lbl{fm, "Project Directory"};
     project_dir_lbl.format(true);
-    std::string default_project_dir = "~/AG/Projects/MyAGProject";
+    std::string default_project_dir = "/AG/Projects/MyAGProject";
     nana::textbox project_dir_textbox {fm, default_project_dir};
     project_dir_textbox.multi_lines(false);
     nana::button search_for_project_directory_btn {fm, "Search"};
@@ -197,6 +210,19 @@ int main()
             project_dir_textbox.select(true);
             project_dir_textbox.del();
             project_dir_textbox.append(folder.value().string(), false);
+        }
+    });
+    project_dir_textbox.events().text_changed([&]
+    {
+        if (boost::filesystem::exists(project_dir_textbox.caption()))
+        {
+            project_dir_textbox.bgcolor(nana::colors::white);
+            status_label.caption("");
+        }   
+        else
+        {
+            project_dir_textbox.bgcolor(nana::colors::red);
+            status_label.caption("Warning: Path does not exist (will attempt to create path on install)");
         }
     });
 
