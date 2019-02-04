@@ -189,7 +189,7 @@ int main()
         }   
         else
         {
-            install_dir_textbox.bgcolor(nana::colors::red);
+            install_dir_textbox.bgcolor(nana::colors::orange);
             status_label.caption("Warning: Path does not exist (will attempt to create path on install)");
         }
     });
@@ -221,7 +221,7 @@ int main()
         }   
         else
         {
-            project_dir_textbox.bgcolor(nana::colors::red);
+            project_dir_textbox.bgcolor(nana::colors::orange);
             status_label.caption("Warning: Path does not exist (will attempt to create path on install)");
         }
     });
